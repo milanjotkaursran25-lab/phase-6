@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Feedback Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <p><a href="view-feedback.html">View All Feedback</a></p>
+
+    <header>
+        <h1>📝 Student Feedback Form</h1>
+        <p>We would love to hear from you!</p>
+    </header>
+
+    <main class="container">
+        <section class="card">
+            <h2>Share Your Feedback</h2>
+
+            <form id="feedbackForm">
+                <label for="name">Your Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your name"
+                    required
+                >
+
+                <label for="rating">Your Rating</label>
+                <select id="rating" required>
+                    <option value="">Select a rating</option>
+                    <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+                    <option value="4">⭐⭐⭐⭐ Very Good</option>
+                    <option value="3">⭐⭐⭐ Good</option>
+                    <option value="2">⭐⭐ Fair</option>
+                    <option value="1">⭐ Poor</option>
+                </select>
+
+                <label for="comment">Your Comments</label>
+                <textarea
+                    id="comment"
+                    rows="5"
+                    placeholder="Write your feedback here..."
+                    required
+                ></textarea>
+
+                <button type="submit" class="btn">Submit Feedback</button>
+            </form>
+
+            <p id="message" role="status"></p>
+
+            <p><a href="/">← Back to Home</a></p>
+        </section>
+
+        <section class="card">
+            <h2>Previous Feedback</h2>
+            <div id="feedbackList">
+                <p>Loading feedback...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Student Feedback Manager</p>
+    </footer>
+
+    <script src="feedback.js"></script>
+</body>
+</html>
