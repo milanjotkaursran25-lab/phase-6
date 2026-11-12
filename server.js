@@ -2,6 +2,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const path = require("path");
 
 const Feedback = require("./models/Feedback");
 
@@ -10,6 +11,14 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
+
+// Serve frontend files
+app.use(express.static(path.join(__dirname, "public")));
+
+// Homepage route
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 // Reuse MongoDB connection between Vercel requests
 let cachedConnection = global.mongoose;
