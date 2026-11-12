@@ -1,0 +1,149 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f4f8;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background: #3548a5;
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.card h2 {
+    color: #3548a5;
+    margin-bottom: 15px;
+}
+
+.card p {
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    background: #3548a5;
+    color: white;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #243580;
+}
+
+footer {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 18px;
+    margin-top: 30px;
+}
+
+input,
+select,
+textarea,
+button {
+    font: inherit;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 24px;
+    }
+
+    .container {
+        margin: 20px auto;
+        padding: 15px;
+    }
+}
+
+/* Feedback form styling */
+
+form {
+    text-align: left;
+}
+
+form label {
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+form input,
+form select,
+form textarea {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+form textarea {
+    resize: vertical;
+}
+
+form button {
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+#message {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.feedback-item {
+    text-align: left;
+    background: #f8f9ff;
+    padding: 18px;
+    margin-top: 15px;
+    border-left: 4px solid #3548a5;
+    border-radius: 6px;
+    overflow-wrap: anywhere;
+}
+
+.feedback-item h3 {
+    color: #3548a5;
+    margin-bottom: 8px;
+}
+
+.feedback-item p {
+    margin-bottom: 8px;
+}
+
+.feedback-item small {
+    color: #666;
+}

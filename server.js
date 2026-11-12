@@ -9,11 +9,11 @@ dotenv.config();
 
 const app = express();
 
-// Middleware
+
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-// Connect to MongoDB and start the server
+
 async function startServer() {
   try {
     await mongoose.connect(process.env.MONGODB_URI);
@@ -31,12 +31,12 @@ async function startServer() {
   }
 }
 
-// POST route: Submit feedback
+
 app.post("/api/feedback", async (req, res) => {
   try {
     const { name, rating, comment } = req.body;
 
-    // Validate name and comment
+   
     if (
       typeof name !== "string" ||
       !name.trim() ||
@@ -48,7 +48,6 @@ app.post("/api/feedback", async (req, res) => {
       });
     }
 
-    // Validate rating
     const numericRating = Number(rating);
 
     if (
@@ -64,14 +63,13 @@ app.post("/api/feedback", async (req, res) => {
       });
     }
 
-    // Create a new feedback document
+   
     const feedback = new Feedback({
       name: name.trim(),
       rating: numericRating,
       comment: comment.trim(),
     });
 
-    // Save feedback to MongoDB
     await feedback.save();
 
     res.status(201).json({
@@ -87,7 +85,7 @@ app.post("/api/feedback", async (req, res) => {
   }
 });
 
-// GET route: Retrieve all feedback
+
 app.get("/api/feedback", async (req, res) => {
   try {
     const feedbackList = await Feedback.find().sort({
@@ -104,5 +102,5 @@ app.get("/api/feedback", async (req, res) => {
   }
 });
 
-// Start the application
+
 startServer();

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>All Student Feedback</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f4f7fb;
+        }
+        .feedback-item {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 15px 0;
+        }
+        a, button {
+            display: inline-block;
+            margin: 8px;
+            padding: 10px 15px;
+            background: #2563eb;
+            color: white;
+            border: 0;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>All Student Feedback</h1>
+
+    <a href="index.html">Home</a>
+    <a href="feedback.html">Submit Feedback</a>
+    <button id="refreshButton" type="button">Refresh</button>
+
+    <p id="status">Loading feedback...</p>
+    <div id="feedbackList"></div>
+
+    <script>
+        const status = document.getElementById("status");
+        const list = document.getElementById("feedbackList");
+
+        async function loadFeedback() {
+            status.textContent = "Loading feedback...";
+            list.replaceChildren();
+
+            try {
+                const response = await fetch("/api/feedback");
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const feedbacks = await response.json();
+
+                if (!Array.isArray(feedbacks)) {
+                    throw new Error("Unexpected API response");
+                }
+
+                if (feedbacks.length === 0) {
+                    status.textContent = "No feedback submitted yet.";
+                    return;
+                }
+
+                status.textContent = `${feedbacks.length} feedback entries`;
+
+                feedbacks.forEach(feedback => {
+                    const card = document.createElement("article");
+                    card.className = "feedback-item";
+
+                    const name = document.createElement("h2");
+                    name.textContent = feedback.name || "Anonymous";
+
+                    const rating = document.createElement("p");
+                    rating.textContent = `Rating: ${feedback.rating ?? "N/A"}`;
+
+                    const comment = document.createElement("p");
+                    comment.textContent = feedback.comment || "No comment provided.";
+
+                    card.append(name, rating, comment);
+
+                    if (feedback.createdAt) {
+                        const date = document.createElement("small");
+                        date.textContent = new Date(feedback.createdAt).toLocaleString();
+                        card.appendChild(date);
+                    }
+
+                    list.appendChild(card);
+                });
+            } catch (error) {
+                console.error(error);
+                status.textContent =
+                    "Unable to load feedback. Check the server and database.";
+            }
+        }
+
+        document.getElementById("refreshButton")
+            .addEventListener("click", loadFeedback);
+
+        loadFeedback();
+    </script>
+</body>
+</html>
